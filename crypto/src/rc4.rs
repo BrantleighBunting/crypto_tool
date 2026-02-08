@@ -1,5 +1,3 @@
-/* Unless doing a test build, make no assumptions about platform */
-#![cfg_attr(not(test), no_std)]
 /* Ensure no unsafe code block in entire crate */
 #![forbid(unsafe_code)]
 
@@ -27,7 +25,8 @@ impl Rc4 {
         self.s.swap(self.i.into(), self.j.into());
 
         // k = s[(s[i] + s[j]) mod 256]
-        let k: u8 = self.s[(self.s[self.i as usize].wrapping_add(self.s[self.j as usize])) as usize];
+        let k: u8 =
+            self.s[(self.s[self.i as usize].wrapping_add(self.s[self.j as usize])) as usize];
         k
     }
 
@@ -49,7 +48,7 @@ impl Rc4 {
         } else {
             Rc4::new(key)
         };
-        
+
         rc4.apply_keystream(data);
     }
 
@@ -89,12 +88,13 @@ mod tests {
     use std::io::{self, BufRead};
     use std::path::Path;
 
-
     use super::Rc4;
     // The output is wrapped in a Result to allow matching on errors.
     // Returns an Iterator to the Reader of the lines of the file.
     fn read_lines<P>(filename: P) -> io::Result<io::Lines<io::BufReader<File>>>
-    where P: AsRef<Path>, {
+    where
+        P: AsRef<Path>,
+    {
         let file = File::open(filename)?;
         Ok(io::BufReader::new(file).lines())
     }
@@ -169,8 +169,14 @@ mod tests {
         let plaintext_1: [u8; 5] = msg_1;
         let plaintext_2: [u8; 7] = msg_2;
 
-        println!("Plaintext msg_1 (initial): {}", String::from_utf8(msg_1.to_vec()).unwrap());
-        println!("Plaintext msg_2 (initial): {}", String::from_utf8(msg_2.to_vec()).unwrap());
+        println!(
+            "Plaintext msg_1 (initial): {}",
+            String::from_utf8(msg_1.to_vec()).unwrap()
+        );
+        println!(
+            "Plaintext msg_2 (initial): {}",
+            String::from_utf8(msg_2.to_vec()).unwrap()
+        );
         // Encrypt in-place
         let mut rc4 = Rc4::new(&key);
         rc4.apply_keystream(&mut msg_1);
@@ -234,7 +240,4 @@ mod tests {
             String::from_utf8(msg.to_vec()).unwrap()
         );
     }
-
-
-
 }

@@ -1,11 +1,13 @@
 [package]
-name = "rc4"
+name = "crypto"
 version = "0.1.0"
 resolver = "2"
 edition = "2021"
-authors = ["Brantleigh Bunting <brantleigh.bunting@proton.me>"]
+authors = ["Brantleigh Bunting <brantleigh.bunting@gmail.com>"]
 
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+entropy = "0.4.3"
+ring = "0.17.14"

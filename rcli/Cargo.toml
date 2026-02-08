@@ -3,11 +3,10 @@ name = "rcli"
 version = "0.1.0"
 resolver = "2"
 edition = "2021"
-authors = ["Brantleigh Bunting <brantleigh.bunting@proton.me>"]
+authors = ["Brantleigh Bunting <brantleigh.bunting@gmail.com>"]
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-rc4 = { path = "../rc4" }
+crypto = { path = "../crypto" }
 clap = { version = "^4", features = ["derive"] }
-
